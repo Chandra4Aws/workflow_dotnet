@@ -1,0 +1,30 @@
+
+> workflow-app@0.0.0 lint
+> eslint .
+
+
+C:\Projects\workflow-app\src\context\AuthContext.jsx
+   1:54  error  'useEffect' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                                                no-unused-vars
+   5:17  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  15:21  error  'setLoading' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                                      no-unused-vars
+
+C:\Projects\workflow-app\src\context\WorkflowContext.jsx
+  6:17  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Projects\workflow-app\src\pages\SubmitWorkflow.jsx
+    2:17  error  'useState' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+   24:13  error  'setFormData' is not defined                                                     no-undef
+   32:9   error  'setFormData' is not defined                                                     no-undef
+   32:21  error  'formData' is not defined                                                        no-undef
+   42:20  error  'files' is not defined                                                           no-undef
+   43:23  error  'formData' is not defined                                                        no-undef
+  141:22  error  'formData' is not defined                                                        no-undef
+  143:30  error  'formData' is not defined                                                        no-undef
+  158:52  error  'setFiles' is not defined                                                        no-undef
+
+C:\Projects\workflow-app\src\pages\TaskDetails.jsx
+  2:17  error  'useEffect' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+  2:28  error  'useState' is defined but never used. Allowed unused vars must match /^[A-Z_]/u   no-unused-vars
+
+✖ 15 problems (15 errors, 0 warnings)
+

@@ -1,0 +1,76 @@
+
+> workflow-app@0.0.0 lint
+> eslint .
+
+
+C:\Projects\workflow-app\src\context\AuthContext.jsx
+   5:17  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    react-refresh/only-export-components
+  17:13  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  15 |         const storedUser = localStorage.getItem('workflow_user')
+  16 |         if (storedUser) {
+> 17 |             setUser(JSON.parse(storedUser))
+     |             ^^^^^^^ Avoid calling setState() directly within an effect
+  18 |         }
+  19 |         setLoading(false)
+  20 |     }, [])  react-hooks/set-state-in-effect
+
+C:\Projects\workflow-app\src\context\WorkflowContext.jsx
+  6:17  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Projects\workflow-app\src\pages\SubmitWorkflow.jsx
+  22:13  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  20 |         const found = templates.find(t => t.id === templateId)
+  21 |         if (found) {
+> 22 |             setTemplate(found)
+     |             ^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  23 |             // Initialize form data from schema
+  24 |             if (found.formSchema) {
+  25 |                 setFormData(found.formSchema.map(field => ({  react-hooks/set-state-in-effect
+  81:17  error  Unexpected lexical declaration in case block                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        no-case-declarations
+
+C:\Projects\workflow-app\src\pages\TaskDetails.jsx
+  18:13  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  16 |         const found = workflows.find(w => w.id === id)
+  17 |         if (found) {
+> 18 |             setWorkflow(found)
+     |             ^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  19 |         } else {
+  20 |             // Handle not found layout or redirect
+  21 |             // console.log("Workflow not found")  react-hooks/set-state-in-effect
+
+C:\Projects\workflow-app\src\pages\WorkflowBuilder.jsx
+  20:17  error  Error: Cannot call impure function during render
+
+`Date.now` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+  18 |     const addField = (type) => {
+  19 |         setFormFields([...formFields, {
+> 20 |             id: Date.now(),
+     |                 ^^^^^^^^^^ Cannot call impure function
+  21 |             type,
+  22 |             label: '',
+  23 |             // value removed, as we are defining the schema  react-hooks/purity
+
+✖ 7 problems (7 errors, 0 warnings)
+
