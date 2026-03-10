@@ -1,0 +1,29 @@
+# Node / Vite frontend
+node_modules/
+dist/
+
+# Logs
+*.log
+backend_dotnet/*log*.txt
+backend_dotnet/*debug*.txt
+backend_dotnet/*run_*.txt
+
+# .NET build artifacts
+backend_dotnet/bin/
+backend_dotnet/obj/
+
+# Local uploads and temp files
+backend_dotnet/uploads/
+
+# VS / Rider / IDE
+.vscode/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+backend_dotnet/.vs/
+
+# Other archives
+*.zip
+*.7z

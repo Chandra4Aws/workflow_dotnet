@@ -22,71 +22,12 @@ namespace WorkflowBackend.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("GroupTemplate", b =>
-                {
-                    b.Property<long>("ReviewerGroupsId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("TemplateId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("ReviewerGroupsId", "TemplateId");
-
-                    b.HasIndex("TemplateId");
-
-                    b.ToTable("template_reviewers", (string)null);
-                });
-
-            modelBuilder.Entity("GroupUser", b =>
-                {
-                    b.Property<long>("GroupsId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("MembersId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("GroupsId", "MembersId");
-
-                    b.HasIndex("MembersId");
-
-                    b.ToTable("user_groups", (string)null);
-                });
-
-            modelBuilder.Entity("GroupWorkflow", b =>
-                {
-                    b.Property<long>("ReviewerGroupsId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("WorkflowId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("ReviewerGroupsId", "WorkflowId");
-
-                    b.HasIndex("WorkflowId");
-
-                    b.ToTable("workflow_reviewers", (string)null);
-                });
-
-            modelBuilder.Entity("RoleUser", b =>
-                {
-                    b.Property<int>("RolesId")
-                        .HasColumnType("integer");
-
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("RolesId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("user_roles", (string)null);
-                });
-
             modelBuilder.Entity("WorkflowBackend.Models.Group", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
@@ -95,11 +36,13 @@ namespace WorkflowBackend.Migrations
                         .HasColumnName("created_at");
 
                     b.Property<string>("Description")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("description");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("name");
 
                     b.HasKey("Id");
 
@@ -110,14 +53,16 @@ namespace WorkflowBackend.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(20)
-                        .HasColumnType("character varying(20)");
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("name");
 
                     b.HasKey("Id");
 
@@ -128,32 +73,39 @@ namespace WorkflowBackend.Migrations
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<long?>("ApproverGroupId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("approver_group_id");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
-                    b.Property<long>("CreatorId")
-                        .HasColumnType("bigint");
+                    b.Property<long?>("CreatorId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("creator_id");
 
                     b.Property<string>("Description")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("description");
 
                     b.Property<string>("Files")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("files");
 
                     b.Property<string>("FormSchema")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("form_schema");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("title");
 
                     b.HasKey("Id");
 
@@ -168,24 +120,28 @@ namespace WorkflowBackend.Migrations
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("email");
 
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(120)
-                        .HasColumnType("character varying(120)");
+                        .HasColumnType("character varying(120)")
+                        .HasColumnName("password");
 
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasMaxLength(20)
-                        .HasColumnType("character varying(20)");
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("username");
 
                     b.HasKey("Id");
 
@@ -196,45 +152,56 @@ namespace WorkflowBackend.Migrations
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<long?>("ApproverGroupId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("approver_group_id");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
-                    b.Property<long>("CreatorId")
-                        .HasColumnType("bigint");
+                    b.Property<long?>("CreatorId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("creator_id");
 
                     b.Property<string>("Description")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("description");
 
                     b.Property<string>("Files")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("files");
 
                     b.Property<string>("FormData")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("form_data");
 
                     b.Property<string>("ReviewerStatuses")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("reviewer_statuses");
 
                     b.Property<string>("Status")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("status");
 
                     b.Property<long?>("TemplateId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("template_id");
 
                     b.Property<string>("Timeline")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("timeline");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("title");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
@@ -249,64 +216,72 @@ namespace WorkflowBackend.Migrations
                     b.ToTable("workflows");
                 });
 
-            modelBuilder.Entity("GroupTemplate", b =>
+            modelBuilder.Entity("template_reviewers", b =>
                 {
-                    b.HasOne("WorkflowBackend.Models.Group", null)
-                        .WithMany()
-                        .HasForeignKey("ReviewerGroupsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<long>("group_id")
+                        .HasColumnType("bigint")
+                        .HasColumnName("group_id");
 
-                    b.HasOne("WorkflowBackend.Models.Template", null)
-                        .WithMany()
-                        .HasForeignKey("TemplateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<long>("template_id")
+                        .HasColumnType("bigint")
+                        .HasColumnName("template_id");
+
+                    b.HasKey("group_id", "template_id");
+
+                    b.HasIndex("template_id");
+
+                    b.ToTable("template_reviewers", (string)null);
                 });
 
-            modelBuilder.Entity("GroupUser", b =>
+            modelBuilder.Entity("user_groups", b =>
                 {
-                    b.HasOne("WorkflowBackend.Models.Group", null)
-                        .WithMany()
-                        .HasForeignKey("GroupsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<long>("group_id")
+                        .HasColumnType("bigint")
+                        .HasColumnName("group_id");
 
-                    b.HasOne("WorkflowBackend.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("MembersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<long>("user_id")
+                        .HasColumnType("bigint")
+                        .HasColumnName("user_id");
+
+                    b.HasKey("group_id", "user_id");
+
+                    b.HasIndex("user_id");
+
+                    b.ToTable("user_groups", (string)null);
                 });
 
-            modelBuilder.Entity("GroupWorkflow", b =>
+            modelBuilder.Entity("user_roles", b =>
                 {
-                    b.HasOne("WorkflowBackend.Models.Group", null)
-                        .WithMany()
-                        .HasForeignKey("ReviewerGroupsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("role_id")
+                        .HasColumnType("integer")
+                        .HasColumnName("role_id");
 
-                    b.HasOne("WorkflowBackend.Models.Workflow", null)
-                        .WithMany()
-                        .HasForeignKey("WorkflowId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<long>("user_id")
+                        .HasColumnType("bigint")
+                        .HasColumnName("user_id");
+
+                    b.HasKey("role_id", "user_id");
+
+                    b.HasIndex("user_id");
+
+                    b.ToTable("user_roles", (string)null);
                 });
 
-            modelBuilder.Entity("RoleUser", b =>
+            modelBuilder.Entity("workflow_reviewers", b =>
                 {
-                    b.HasOne("WorkflowBackend.Models.Role", null)
-                        .WithMany()
-                        .HasForeignKey("RolesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<long>("group_id")
+                        .HasColumnType("bigint")
+                        .HasColumnName("group_id");
 
-                    b.HasOne("WorkflowBackend.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<long>("workflow_id")
+                        .HasColumnType("bigint")
+                        .HasColumnName("workflow_id");
+
+                    b.HasKey("group_id", "workflow_id");
+
+                    b.HasIndex("workflow_id");
+
+                    b.ToTable("workflow_reviewers", (string)null);
                 });
 
             modelBuilder.Entity("WorkflowBackend.Models.Template", b =>
@@ -317,9 +292,7 @@ namespace WorkflowBackend.Migrations
 
                     b.HasOne("WorkflowBackend.Models.User", "Creator")
                         .WithMany()
-                        .HasForeignKey("CreatorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CreatorId");
 
                     b.Navigation("ApproverGroup");
 
@@ -334,13 +307,71 @@ namespace WorkflowBackend.Migrations
 
                     b.HasOne("WorkflowBackend.Models.User", "Creator")
                         .WithMany()
-                        .HasForeignKey("CreatorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CreatorId");
 
                     b.Navigation("ApproverGroup");
 
                     b.Navigation("Creator");
+                });
+
+            modelBuilder.Entity("template_reviewers", b =>
+                {
+                    b.HasOne("WorkflowBackend.Models.Group", null)
+                        .WithMany()
+                        .HasForeignKey("group_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WorkflowBackend.Models.Template", null)
+                        .WithMany()
+                        .HasForeignKey("template_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("user_groups", b =>
+                {
+                    b.HasOne("WorkflowBackend.Models.Group", null)
+                        .WithMany()
+                        .HasForeignKey("group_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WorkflowBackend.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("user_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("user_roles", b =>
+                {
+                    b.HasOne("WorkflowBackend.Models.Role", null)
+                        .WithMany()
+                        .HasForeignKey("role_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WorkflowBackend.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("user_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("workflow_reviewers", b =>
+                {
+                    b.HasOne("WorkflowBackend.Models.Group", null)
+                        .WithMany()
+                        .HasForeignKey("group_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WorkflowBackend.Models.Workflow", null)
+                        .WithMany()
+                        .HasForeignKey("workflow_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
